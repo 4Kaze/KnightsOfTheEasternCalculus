@@ -9,5 +9,4 @@ languages:
     include:
     - /lambda/src/test/.*\.java
     exclude:
-    - /lambda/src/main/*
-    - /lambda/gradle/*
+    - /lambda/src/main/**\.java
