@@ -1,10 +1,9 @@
- 
-component_depth: 4
+component_depth: 6
 languages:
-- java
-exclude:
-- /node_modules/.*
-- /web/.*
-test:
-    exclude:
-      - /lambda/src/main/.*
+- name: java
+  exclude:
+  - /node_modules/.*
+  - /web/.*
+  test:
+   exclude:
+   - /lambda/src/main/.*\.java
