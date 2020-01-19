@@ -6,8 +6,6 @@ languages:
 - java
 - name: java
   test:
-    include:
-    - /lambda/src/test/.*\.java
     exclude:
     - /lambda/src/main/java/model/test/.*\.java
     - /lambda/src/main/java/lambda/test/.*\.java
