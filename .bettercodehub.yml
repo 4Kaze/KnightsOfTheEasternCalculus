@@ -3,6 +3,7 @@ exclude:
 - /node_modules/.*
 - /web/.*
 languages:
+- java
 - name: java
   test:
     include:
