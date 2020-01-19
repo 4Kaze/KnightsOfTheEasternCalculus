@@ -9,5 +9,4 @@ languages:
     - /lambda/src/main/.*\.java
   test:
     exclude:
-    - /lambda/src/main/java/model/test/.*\.java
-    - /lambda/src/main/java/lambda/test/.*\.java
+    - /lambda/src/main/.*\.java
