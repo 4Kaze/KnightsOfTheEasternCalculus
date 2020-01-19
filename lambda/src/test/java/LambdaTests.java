@@ -24,8 +24,8 @@ public class LambdaTests {
         SolvableOpenQuestion so = new SolvableOpenQuestion(o);
         List<SolvableOpenQuestion> list = new ArrayList<>();
         list.add(so);
-        TestInstance testInstance = new TestInstance("aneczka256", 1234578, "TITLE", new ArrayList<>(), list,
-                new ArrayList<>(), 10, 0, 0);
+        TestInstance testInstance = new TestInstance();
+        testInstance.setOpenQuestions(list);
 
         testInstance.getOpenQuestions().get(0).setCorrectAnswer(Utils.capitalize(testInstance.getOpenQuestions().get(0).getCorrectAnswer()));
         Assert.assertEquals("Asd", testInstance.getOpenQuestions().get(0).getCorrectAnswer());
