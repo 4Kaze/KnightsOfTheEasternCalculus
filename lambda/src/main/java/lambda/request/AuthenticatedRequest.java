@@ -1,4 +1,4 @@
-package model.request;
+package lambda.request;
 
 public class AuthenticatedRequest<T> {
     private String userId;

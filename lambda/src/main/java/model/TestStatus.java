@@ -1,4 +1,4 @@
-package model.test;
+package model;
 
 public enum TestStatus {
     NOTSOLVED (0),

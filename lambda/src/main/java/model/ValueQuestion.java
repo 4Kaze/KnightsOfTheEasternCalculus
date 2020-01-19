@@ -1,22 +1,22 @@
-package model.test;
+package model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 
 import java.io.Serializable;
 
 @DynamoDBDocument
-public class OpenQuestion implements Serializable {
+public class ValueQuestion implements Serializable {
     private String question;
-    private String correctAnswer;
+    private float correctAnswer;
     private int maxScore;
 
-    public OpenQuestion() {
+    public ValueQuestion() {
     }
 
-    public OpenQuestion(OpenQuestion openQuestion) {
-        this.question = openQuestion.question;
-        this.correctAnswer = openQuestion.correctAnswer;
-        this.maxScore = openQuestion.maxScore;
+    public ValueQuestion(ValueQuestion valueQuestion) {
+        this.question = valueQuestion.question;
+        this.correctAnswer = valueQuestion.correctAnswer;
+        this.maxScore = valueQuestion.maxScore;
     }
 
     public String getQuestion() {
@@ -27,11 +27,11 @@ public class OpenQuestion implements Serializable {
         this.question = question;
     }
 
-    public String getCorrectAnswer() {
+    public float getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(float correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 

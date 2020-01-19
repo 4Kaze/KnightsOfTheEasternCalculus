@@ -3,7 +3,8 @@ package lambda.test;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import model.request.AuthenticatedRequest;
+import lambda.request.AuthenticatedRequest;
+import model.*;
 import model.test.*;
 import lambda.Response;
 

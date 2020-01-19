@@ -4,8 +4,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import model.request.AuthenticatedRequest;
-import model.test.TestInstance;
+import lambda.request.AuthenticatedRequest;
+import model.TestInstance;
 import lambda.Response;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package model.request;
+package lambda.request;
 
 public class TestRequest {
     private String ownerId;

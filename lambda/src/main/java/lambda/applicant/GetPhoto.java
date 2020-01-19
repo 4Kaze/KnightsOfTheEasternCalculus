@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.Base64;
 import com.amazonaws.util.IOUtils;
-import model.request.AuthenticatedRequest;
+import lambda.request.AuthenticatedRequest;
 
 import java.io.IOException;
 

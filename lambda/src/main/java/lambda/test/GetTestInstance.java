@@ -2,9 +2,9 @@ package lambda.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import model.request.AuthenticatedRequest;
-import model.request.TestRequest;
-import model.test.TestInstance;
+import lambda.request.AuthenticatedRequest;
+import lambda.request.TestRequest;
+import model.TestInstance;
 import lambda.Response;
 
 import java.util.ArrayList;

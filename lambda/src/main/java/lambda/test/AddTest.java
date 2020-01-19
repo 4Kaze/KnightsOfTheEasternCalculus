@@ -2,8 +2,8 @@ package lambda.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import model.request.AuthenticatedRequest;
-import model.test.Test;
+import lambda.request.AuthenticatedRequest;
+import model.Test;
 import lambda.Response;
 
 import java.util.Date;

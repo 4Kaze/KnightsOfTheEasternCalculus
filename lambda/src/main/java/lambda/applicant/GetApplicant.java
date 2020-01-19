@@ -3,7 +3,7 @@ package lambda.applicant;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.applicant.applicant.Applicant;
-import model.request.AuthenticatedRequest;
+import lambda.request.AuthenticatedRequest;
 import lambda.Response;
 import util.Utils;
 

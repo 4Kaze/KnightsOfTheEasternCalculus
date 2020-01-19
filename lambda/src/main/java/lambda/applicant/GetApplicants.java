@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.applicant.applicant.ApplicantListItem;
-import model.request.AuthenticatedRequest;
+import lambda.request.AuthenticatedRequest;
 import lambda.Response;
 import util.Utils;
 
