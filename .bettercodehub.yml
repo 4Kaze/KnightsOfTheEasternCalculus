@@ -3,8 +3,10 @@ exclude:
 - /node_modules/.*
 - /web/.*
 languages:
-- java
 - name: java
+  production:
+    include:
+    - /lambda/src/main/.*\.java
   test:
     exclude:
     - /lambda/src/main/java/model/test/.*\.java
