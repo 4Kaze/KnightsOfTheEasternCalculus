@@ -5,6 +5,9 @@ exclude:
 languages:
 - java
 - name: java
+  production:
+    exclude:
+    - /lambda/gradle/*
   test:
     include:
     - /lambda/src/test/.*\.java
