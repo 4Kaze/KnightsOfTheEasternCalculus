@@ -16,10 +16,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tools {
-    private String yandexKey = "trnsl.1.1.20200108T191910Z.fe657624420b3a8c.9b1c3b15e8688d96a425d4596dfc2c6321f04ee2";
-    private String yandexDicKey = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200116T213001Z.6be5317691bae1ff.7faedf456380aa760d1a473b3a50be12d04d622d&lang=en-en&text=";
-    private String translateUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=";
-    private String url = translateUrl + yandexKey + "&text=";
     private Test test;
     private String lang = "";
 
@@ -68,13 +64,12 @@ public class Tools {
 
     //region [Tools]
     private static String streamToString(InputStream inputStream) {
-        String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
-        return text;
+        return new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
     }
     //endregion
 
     //region [Connection and request]
-    public HttpURLConnection createPostConnection(String input) throws IOException {
+    private HttpURLConnection createPostConnection(String input) throws IOException {
         URL obj = new URL(input);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
@@ -86,7 +81,7 @@ public class Tools {
         return con;
     }
 
-    public HttpURLConnection createGetConnection(String input) throws IOException {
+    private HttpURLConnection createGetConnection(String input) throws IOException {
         URL url = new URL(input);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
@@ -94,10 +89,11 @@ public class Tools {
         return con;
     }
 
-    public String getRequest(String input) {
+    private String getRequest(String input) {
         String result = null;
         try {
-            InputStream inputStream = createGetConnection((this.yandexDicKey + input).replace(" ", "%20")).getInputStream();
+            String yandexDicKey = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200116T213001Z.6be5317691bae1ff.7faedf456380aa760d1a473b3a50be12d04d622d&lang=en-en&text=";
+            InputStream inputStream = createGetConnection((yandexDicKey + input).replace(" ", "%20")).getInputStream();
             result = streamToString(inputStream);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -105,10 +101,13 @@ public class Tools {
         return result;
     }
 
-    public String postRequest(String input) {
+    private String postRequest(String input) {
         String result = null;
         try {
-            InputStream inputStream = createPostConnection((this.url + input + this.lang).replace(" ", "%20")).getInputStream();
+            String yandexKey = "trnsl.1.1.20200108T191910Z.fe657624420b3a8c.9b1c3b15e8688d96a425d4596dfc2c6321f04ee2";
+            String translateUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=";
+            String url = translateUrl + yandexKey + "&text=";
+            InputStream inputStream = createPostConnection((url + input + this.lang).replace(" ", "%20")).getInputStream();
             result = streamToString(inputStream);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -123,13 +122,13 @@ public class Tools {
             closeQuestion.setQuestion(translateText(closeQuestion.getQuestion()));
 
             for (int j = 0; j < closeQuestion.getCorrectAnswers().size(); j++) {
-                ArrayList<String> correctAnswers = new ArrayList<String>();
+                ArrayList<String> correctAnswers = new ArrayList<>();
                 correctAnswers.add(translateText(closeQuestion.getCorrectAnswers().get(j)));
                 closeQuestion.setCorrectAnswers(correctAnswers);
             }
 
             for (int j = 0; j < closeQuestion.getIncorrectAnswers().size(); j++) {
-                ArrayList<String> incorrectAnswer = new ArrayList<String>();
+                ArrayList<String> incorrectAnswer = new ArrayList<>();
                 incorrectAnswer.add(translateText(closeQuestion.getIncorrectAnswers().get(j)));
                 closeQuestion.setIncorrectAnswers(incorrectAnswer);
             }

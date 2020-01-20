@@ -7,7 +7,7 @@ import lambda.request.AuthenticatedRequest;
 import model.Test;
 import lambda.Response;
 
-public class TranslateTest extends Handler<AuthenticatedRequest<Test>> {
+class TranslateTest extends Handler<AuthenticatedRequest<Test>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<Test> input, Context context) {

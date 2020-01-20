@@ -7,7 +7,7 @@ import lambda.request.AuthenticatedRequest;
 import lambda.Response;
 import util.Utils;
 
-public class GetApplicant extends Handler<AuthenticatedRequest<String>> {
+class GetApplicant extends Handler<AuthenticatedRequest<String>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<String> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter() && !authenticatedRequest.getUserId().equals(authenticatedRequest.getBody()))

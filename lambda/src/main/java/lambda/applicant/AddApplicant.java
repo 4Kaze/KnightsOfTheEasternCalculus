@@ -5,7 +5,7 @@ import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.Applicant;
 
-public class AddApplicant extends Handler<Applicant> {
+class AddApplicant extends Handler<Applicant> {
 
     @Override
     public Response handleRequest(Applicant input, Context context) {

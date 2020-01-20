@@ -7,8 +7,8 @@ import lambda.request.AuthenticatedRequest;
 import model.Test;
 import lambda.Response;
 
-public class UpdateTest extends Handler<AuthenticatedRequest<Test>> {
-    private DynamoDBMapperConfig dynamoDBMapperConfig = new DynamoDBMapperConfig.Builder()
+class UpdateTest extends Handler<AuthenticatedRequest<Test>> {
+    private final DynamoDBMapperConfig dynamoDBMapperConfig = new DynamoDBMapperConfig.Builder()
             .withConsistentReads(DynamoDBMapperConfig.ConsistentReads.CONSISTENT)
             .withSaveBehavior(DynamoDBMapperConfig.SaveBehavior.UPDATE)
             .build();

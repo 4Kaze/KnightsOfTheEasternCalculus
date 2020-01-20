@@ -9,7 +9,6 @@ import model.CloseQuestion;
 import model.OpenQuestion;
 import model.SolvableOpenQuestion;
 import model.TestInstance;
-import model.test.*;
 import org.junit.Assert;
 import org.junit.Test;
 import util.Utils;

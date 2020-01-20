@@ -2,8 +2,8 @@ package lambda;
 
 public class Response {
 
-    int code;
-    Object body;
+    private int code;
+    private Object body;
 
     public Response() {
     }

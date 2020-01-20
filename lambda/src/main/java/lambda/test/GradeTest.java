@@ -8,13 +8,12 @@ import model.SolvableOpenQuestion;
 import model.SolvableValueQuestion;
 import model.TestInstance;
 import model.TestStatus;
-import model.test.*;
 import lambda.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
+class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<TestInstance> authenticatedRequest, Context context) {
@@ -29,7 +28,7 @@ public class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
         if (test.getOpenQuestions() != null) {
             List<SolvableOpenQuestion> open = new ArrayList<>();
-            SolvableOpenQuestion o = null;
+            SolvableOpenQuestion o;
             for (int i = 0; i < test.getOpenQuestions().size(); i++) {
                 o = test.getOpenQuestions().get(i);
                 o.setAnswer(input.getOpenQuestions().get(i).getAnswer());
@@ -45,7 +44,7 @@ public class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
         if (test.getValueQuestions() != null) {
             List<SolvableValueQuestion> value = new ArrayList<>();
-            SolvableValueQuestion v = null;
+            SolvableValueQuestion v;
             for (int i = 0; i < test.getValueQuestions().size(); i++) {
                 v = test.getValueQuestions().get(i);
                 v.setAnswer(input.getValueQuestions().get(i).getAnswer());

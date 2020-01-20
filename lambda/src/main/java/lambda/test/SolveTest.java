@@ -5,13 +5,12 @@ import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.request.AuthenticatedRequest;
 import model.*;
-import model.test.*;
 import lambda.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
+class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<TestInstance> authenticatedRequest, Context context) {
         if(!authenticatedRequest.getUserId().equals(authenticatedRequest.getBody().getApplicantId()))
@@ -28,7 +27,7 @@ public class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
         if (test.getCloseQuestions() != null) {
             List<SolvableClosedQuestion> close = new ArrayList<>();
-            SolvableClosedQuestion c = null;
+            SolvableClosedQuestion c;
             for (int i = 0; i < test.getCloseQuestions().size(); i++) {
                 c = test.getCloseQuestions().get(i);
                 c.setChosenAnswers(input.getCloseQuestions().get(i).getChosenAnswers());
@@ -43,7 +42,7 @@ public class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
         if (test.getOpenQuestions() != null) {
             List<SolvableOpenQuestion> open = new ArrayList<>();
-            SolvableOpenQuestion o = null;
+            SolvableOpenQuestion o;
             for (int i = 0; i < test.getOpenQuestions().size(); i++) {
                 o = test.getOpenQuestions().get(i);
                 o.setAnswer(input.getOpenQuestions().get(i).getAnswer());
@@ -58,7 +57,7 @@ public class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
 
         if (test.getValueQuestions() != null) {
             List<SolvableValueQuestion> value = new ArrayList<>();
-            SolvableValueQuestion v = null;
+            SolvableValueQuestion v;
             for (int i = 0; i < test.getValueQuestions().size(); i++) {
                 v = test.getValueQuestions().get(i);
                 v.setAnswer(input.getValueQuestions().get(i).getAnswer());
@@ -96,10 +95,8 @@ public class SolveTest extends Handler<AuthenticatedRequest<TestInstance>> {
     }
 
     private void calculateValue(List<SolvableValueQuestion> value) {
-        value.forEach( question -> {
-            question.setReceivedScore((Math.abs(question.getAnswer() - question.getCorrectAnswer()) < 0.01
-                    ? question.getMaxScore() : 0));
-        });
+        value.forEach( question -> question.setReceivedScore((Math.abs(question.getAnswer() - question.getCorrectAnswer()) < 0.01
+                ? question.getMaxScore() : 0)));
     }
 
 }

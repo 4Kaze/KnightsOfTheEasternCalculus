@@ -10,7 +10,7 @@ import lambda.Response;
 
 import java.util.*;
 
-public class GetAllTests extends Handler<AuthenticatedRequest<GetAllTests.TestQuery>> {
+class GetAllTests extends Handler<AuthenticatedRequest<GetAllTests.TestQuery>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<GetAllTests.TestQuery> authenticatedRequest, Context context) {
@@ -38,11 +38,11 @@ public class GetAllTests extends Handler<AuthenticatedRequest<GetAllTests.TestQu
         return new Response(200, tab);
     }
 
-    public static class TestQuery {
+    static class TestQuery {
         private String ownerId;
         private String title;
 
-        public String getOwnerId() {
+        String getOwnerId() {
             return ownerId;
         }
 
@@ -50,7 +50,7 @@ public class GetAllTests extends Handler<AuthenticatedRequest<GetAllTests.TestQu
             this.ownerId = ownerId;
         }
 
-        public String getTitle() {
+        String getTitle() {
             return title;
         }
 

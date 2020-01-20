@@ -9,7 +9,7 @@ import lambda.Response;
 
 import java.util.ArrayList;
 
-public class GetTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
+class GetTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<TestRequest> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter() && !authenticatedRequest.getUserId().equals(authenticatedRequest.getBody().getOwnerId()))
@@ -23,34 +23,24 @@ public class GetTestInstance extends Handler<AuthenticatedRequest<TestRequest>> 
             return new Response(403, "Insufficient permissions");
 
         if (test.getStatus() == 0) {
-            if (test.getCloseQuestions() != null) {
-                for (int i = 0; i < test.getCloseQuestions().size(); i++) {
-                    test.getCloseQuestions().get(i).setCorrectAnswers(new ArrayList<>());
-                }
-            } else {
+            if(test.getCloseQuestions() == null)
                 test.setCloseQuestions(new ArrayList<>());
-            }
-            if (test.getOpenQuestions() != null) {
-                for (int i = 0; i < test.getOpenQuestions().size(); i++) {
-                    test.getOpenQuestions().get(i).setCorrectAnswer("");
-                }
-            } else {
+            else
+                test.getCloseQuestions().forEach(question -> question.setCorrectAnswers(new ArrayList<>()));
+
+            if(test.getOpenQuestions() == null)
                 test.setOpenQuestions(new ArrayList<>());
-            }
-            if (test.getValueQuestions() != null) {
-                for (int i = 0; i < test.getValueQuestions().size(); i++) {
-                    test.getValueQuestions().get(i).setCorrectAnswer(0f);
-                }
-            } else {
+            else
+                test.getOpenQuestions().forEach(question -> question.setCorrectAnswer(""));
+
+            if(test.getValueQuestions() == null)
                 test.setValueQuestions(new ArrayList<>());
-            }
+            else
+                test.getValueQuestions().forEach(question -> question.setCorrectAnswer(null));
+
         } else if (test.getStatus() == 1) {
-            for (int i = 0; i < test.getOpenQuestions().size(); i++ ){
-                test.getOpenQuestions().get(i).setReceivedScore(0);
-            }
-            for (int i = 0; i < test.getValueQuestions().size(); i++) {
-                test.getValueQuestions().get(i).setReceivedScore(0);
-            }
+            test.getOpenQuestions().forEach(question -> question.setReceivedScore(0));
+            test.getValueQuestions().forEach(question -> question.setReceivedScore(0));
         }
         return new Response(200, test);
 

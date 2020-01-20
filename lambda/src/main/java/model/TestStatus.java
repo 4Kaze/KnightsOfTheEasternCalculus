@@ -5,8 +5,8 @@ public enum TestStatus {
     SOLVED (1),
     CHECKED (2);
 
-    private int value;
-    private TestStatus(int value) {
+    private final int value;
+    TestStatus(int value) {
         this.value = value;
     }
 

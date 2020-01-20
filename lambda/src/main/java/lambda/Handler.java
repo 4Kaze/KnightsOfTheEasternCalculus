@@ -5,13 +5,13 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public abstract class Handler<I> implements RequestHandler<I, Response> {
-    private DynamoDBMapper dynamoDBMapper;
+    private final DynamoDBMapper dynamoDBMapper;
 
-    public Handler() {
+    protected Handler() {
         this.dynamoDBMapper = new DynamoDBMapper(AmazonDynamoDBClientBuilder.defaultClient());
     }
 
-    public DynamoDBMapper getMapper() {
+    protected DynamoDBMapper getMapper() {
         return dynamoDBMapper;
     }
 }

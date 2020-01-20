@@ -8,12 +8,11 @@ import lambda.request.AuthenticatedRequest;
 import model.TestInstance;
 import lambda.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GetTestInstancesForUser extends Handler<AuthenticatedRequest<String>> {
+class GetTestInstancesForUser extends Handler<AuthenticatedRequest<String>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<String> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter() && !authenticatedRequest.getUserId().equals(authenticatedRequest.getBody()))
@@ -32,30 +31,11 @@ public class GetTestInstancesForUser extends Handler<AuthenticatedRequest<String
         }
 
         List<TestInstance> tab = getMapper().query(TestInstance.class, query);
-
-        for (int i = 0; i < tab.size(); i++) {
-            if (tab.get(i).getCloseQuestions() != null) {
-                for (int j = 0; j < tab.get(i).getCloseQuestions().size(); j++) {
-                    tab.get(i).getCloseQuestions().get(j).setCorrectAnswers(new ArrayList<>());
-                }
-            } else {
-                tab.get(i).setOpenQuestions(new ArrayList<>());
-            }
-            if (tab.get(i).getOpenQuestions() != null) {
-                for (int j = 0; j < tab.get(i).getOpenQuestions().size(); j++) {
-                    tab.get(i).getOpenQuestions().get(j).setCorrectAnswer("");
-                }
-            } else {
-                tab.get(i).setOpenQuestions(new ArrayList<>());
-            }
-            if (tab.get(i).getValueQuestions() != null) {
-                for (int j = 0; j < tab.get(i).getValueQuestions().size(); j++) {
-                    tab.get(i).getValueQuestions().get(j).setCorrectAnswer(0f);
-                }
-            } else {
-                tab.get(i).setValueQuestions(new ArrayList<>());
-            }
-        }
+        tab.forEach(test -> {
+            test.getCloseQuestions().forEach(question -> question.setCorrectAnswers(null));
+            test.getOpenQuestions().forEach(question -> question.setCorrectAnswer(null));
+            test.getValueQuestions().forEach(question -> question.setCorrectAnswer(null));
+        });
 
         return new Response(200, tab);
     }

@@ -7,7 +7,7 @@ import lambda.request.TestRequest;
 import model.Test;
 import lambda.Response;
 
-public class GetTest extends Handler<AuthenticatedRequest<TestRequest>> {
+class GetTest extends Handler<AuthenticatedRequest<TestRequest>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<TestRequest> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter())

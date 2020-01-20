@@ -7,7 +7,7 @@ import lambda.request.TestRequest;
 import model.TestInstance;
 import lambda.Response;
 
-public class DeleteTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
+class DeleteTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
     @Override
     public Response handleRequest(AuthenticatedRequest<TestRequest> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter())

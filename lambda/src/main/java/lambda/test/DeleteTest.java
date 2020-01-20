@@ -7,7 +7,7 @@ import lambda.request.TestRequest;
 import model.Test;
 import lambda.Response;
 
-public class DeleteTest extends Handler<AuthenticatedRequest<TestRequest>> {
+class DeleteTest extends Handler<AuthenticatedRequest<TestRequest>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<TestRequest> authenticatedRequest, Context context) {

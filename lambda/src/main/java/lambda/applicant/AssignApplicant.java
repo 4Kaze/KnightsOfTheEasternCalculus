@@ -7,7 +7,6 @@ import lambda.Handler;
 import lambda.applicant.applicant.Applicant;
 import lambda.request.AuthenticatedRequest;
 import model.*;
-import model.test.*;
 import lambda.Response;
 
 import java.util.*;
@@ -23,10 +22,10 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
 
         AssignRequest input = authenticatedRequest.getBody();
 
-        DynamoDBQueryExpression queryExpression;
+        DynamoDBQueryExpression<TestInstance> queryExpression;
 
         if(!input.isForce()) {
-            Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+            Map<String, AttributeValue> eav = new HashMap<>();
             eav.put(":val", new AttributeValue().withN(Long.toString(input.getTestId())));
             eav.put(":val2", new AttributeValue().withS(input.getRecruiterId()));
             eav.put(":id", new AttributeValue().withS(input.getApplicantId()));
@@ -34,14 +33,14 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
             Map<String, String> attributeNames = new HashMap<>();
             attributeNames.put("#t", "timestamp");
 
-            queryExpression = new DynamoDBQueryExpression()
+            queryExpression = new DynamoDBQueryExpression<TestInstance>()
                     .withKeyConditionExpression("applicantId = :id")
                     .withFilterExpression("testId = :val AND recruiterId = :val2")
                     .withExpressionAttributeValues(eav)
                     .withProjectionExpression("#t")
                     .withExpressionAttributeNames(attributeNames);
 
-            List<TestInstance> queryList = new ArrayList<TestInstance>(getMapper().query(TestInstance.class, queryExpression));
+            List<TestInstance> queryList = new ArrayList<>(getMapper().query(TestInstance.class, queryExpression));
 
             if (!queryList.isEmpty()) {
                 return new Response(409, queryList.stream()
@@ -83,13 +82,13 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
         return new Response(200, testInstance);
     }
 
-    public static class AssignRequest {
+    static class AssignRequest {
         private String applicantId;
         private Long testId;
         private String recruiterId;
         private boolean force = false;
 
-        public String getApplicantId() {
+        String getApplicantId() {
             return applicantId;
         }
 
@@ -97,7 +96,7 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
             this.applicantId = applicantId;
         }
 
-        public Long getTestId() {
+        Long getTestId() {
             return testId;
         }
 
@@ -105,7 +104,7 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
             this.testId = testId;
         }
 
-        public boolean isForce() {
+        boolean isForce() {
             return force;
         }
 
@@ -113,7 +112,7 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
             this.force = force;
         }
 
-        public String getRecruiterId() {
+        String getRecruiterId() {
             return recruiterId;
         }
 

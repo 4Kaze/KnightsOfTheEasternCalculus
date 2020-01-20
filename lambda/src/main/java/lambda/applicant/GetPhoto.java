@@ -12,7 +12,7 @@ import lambda.request.AuthenticatedRequest;
 
 import java.io.IOException;
 
-public class GetPhoto implements RequestHandler<AuthenticatedRequest<String>, String> {
+class GetPhoto implements RequestHandler<AuthenticatedRequest<String>, String> {
     @Override
     public String handleRequest(AuthenticatedRequest<String> authenticatedRequest, Context context) {
         if(!authenticatedRequest.isRecruiter() && !authenticatedRequest.getUserId().equals(authenticatedRequest.getBody()))

@@ -11,7 +11,7 @@ import util.Utils;
 
 import java.util.*;
 
-public class GetApplicants extends Handler<AuthenticatedRequest<String>> {
+class GetApplicants extends Handler<AuthenticatedRequest<String>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<String> authInput, Context context) {
@@ -24,7 +24,7 @@ public class GetApplicants extends Handler<AuthenticatedRequest<String>> {
         if(input.isEmpty()) {
             scanExpression = new DynamoDBScanExpression();
         } else {
-            Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+            Map<String, AttributeValue> eav = new HashMap<>();
             eav.put(":val", new AttributeValue().withS(input));
 
             scanExpression = new DynamoDBScanExpression()

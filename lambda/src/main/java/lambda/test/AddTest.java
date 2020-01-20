@@ -2,13 +2,13 @@ package lambda.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
+import lambda.Response;
 import lambda.request.AuthenticatedRequest;
 import model.Test;
-import lambda.Response;
 
 import java.util.Date;
 
-public class AddTest extends Handler<AuthenticatedRequest<Test>> {
+class AddTest extends Handler<AuthenticatedRequest<Test>> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<Test> authenticatedRequest, Context context) {

@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SynonymOfWord extends Handler<String> {
+class SynonymOfWord extends Handler<String> {
     @Override
     public Response handleRequest(String input, Context context) {
         Tools tools = new Tools();
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         JsonNode jsonNode = null;
         try {
             jsonNode = new ObjectMapper().readTree(tools.getSynonyms(input));

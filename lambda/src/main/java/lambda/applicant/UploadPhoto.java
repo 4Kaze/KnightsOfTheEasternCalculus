@@ -33,7 +33,7 @@ public class UploadPhoto extends Handler<AuthenticatedRequest<String>> {
             s3.getObjectAcl("applicant-photos", authenticatedRequest.getUserId()+".png");
             if(applicant != null)
                 return new Response(409, "The photo for this replicant already exists");
-        } catch(SdkClientException ex) {
+        } catch(SdkClientException ignored) {
 
         }
         String input = authenticatedRequest.getBody().replaceFirst("data:image/.*;base64,", "");
