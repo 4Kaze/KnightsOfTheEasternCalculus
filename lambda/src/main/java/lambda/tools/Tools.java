@@ -1,10 +1,10 @@
 package lambda.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lambda.model.CloseQuestion;
-import lambda.model.OpenQuestion;
-import lambda.model.Test;
-import lambda.model.ValueQuestion;
+import lambda.test.model.CloseQuestion;
+import lambda.test.model.OpenQuestion;
+import lambda.test.model.Test;
+import lambda.test.model.ValueQuestion;
 import lambda.tools.translator.TranslateResponse;
 
 import java.io.IOException;

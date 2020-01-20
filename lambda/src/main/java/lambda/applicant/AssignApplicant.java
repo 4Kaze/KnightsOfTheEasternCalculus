@@ -6,8 +6,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.Applicant;
-import lambda.model.*;
-import lambda.request.AuthenticatedRequest;
+import lambda.test.model.*;
+import lambda.AuthenticatedRequest;
 
 import java.util.*;
 import java.util.stream.Collectors;

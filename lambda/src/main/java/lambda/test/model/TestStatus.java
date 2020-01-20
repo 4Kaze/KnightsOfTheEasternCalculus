@@ -1,4 +1,4 @@
-package lambda.model;
+package lambda.test.model;
 
 public enum TestStatus {
     NOTSOLVED (0),

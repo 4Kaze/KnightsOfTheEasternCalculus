@@ -5,8 +5,8 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
-import lambda.model.TestInstance;
-import lambda.request.AuthenticatedRequest;
+import lambda.test.model.TestInstance;
+import lambda.AuthenticatedRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;

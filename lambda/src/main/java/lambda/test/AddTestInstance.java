@@ -3,7 +3,7 @@ package lambda.test;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
-import lambda.model.TestInstance;
+import lambda.test.model.TestInstance;
 
 public class AddTestInstance extends Handler<TestInstance> {
     @Override

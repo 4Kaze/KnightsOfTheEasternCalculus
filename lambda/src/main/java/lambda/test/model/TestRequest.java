@@ -1,4 +1,4 @@
-package lambda.request;
+package lambda.test.model;
 
 public class TestRequest {
     private String ownerId;

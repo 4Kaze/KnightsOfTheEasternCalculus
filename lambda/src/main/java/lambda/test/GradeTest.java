@@ -4,11 +4,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
-import lambda.model.SolvableOpenQuestion;
-import lambda.model.SolvableValueQuestion;
-import lambda.model.TestInstance;
-import lambda.model.TestStatus;
-import lambda.request.AuthenticatedRequest;
+import lambda.test.model.SolvableOpenQuestion;
+import lambda.test.model.SolvableValueQuestion;
+import lambda.test.model.TestInstance;
+import lambda.test.model.TestStatus;
+import lambda.AuthenticatedRequest;
 
 import java.util.ArrayList;
 import java.util.List;

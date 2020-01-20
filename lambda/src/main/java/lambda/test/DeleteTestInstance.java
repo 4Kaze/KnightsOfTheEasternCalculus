@@ -3,9 +3,9 @@ package lambda.test;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
-import lambda.model.TestInstance;
-import lambda.request.AuthenticatedRequest;
-import lambda.request.TestRequest;
+import lambda.test.model.TestInstance;
+import lambda.AuthenticatedRequest;
+import lambda.test.model.TestRequest;
 
 class DeleteTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
     @Override

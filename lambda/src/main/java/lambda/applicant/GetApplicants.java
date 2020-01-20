@@ -6,7 +6,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.ApplicantListItem;
-import lambda.request.AuthenticatedRequest;
+import lambda.AuthenticatedRequest;
 import lambda.util.Utils;
 
 import java.util.*;

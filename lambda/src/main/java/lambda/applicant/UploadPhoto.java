@@ -10,7 +10,7 @@ import com.amazonaws.util.Base64;
 import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.Applicant;
-import lambda.request.AuthenticatedRequest;
+import lambda.AuthenticatedRequest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
