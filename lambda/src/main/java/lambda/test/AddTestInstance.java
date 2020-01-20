@@ -11,12 +11,12 @@ public class AddTestInstance extends Handler<TestInstance> {
         if (input != null) {
             if (input.getApplicantId() != null && input.getTimestamp() != 0) {
                 getMapper().save(input);
-                return new Response(200, "TestInstance added successfully");
+                return responseOf(200, "TestInstance added successfully");
             } else {
-                return new Response(400, input);
+                return responseOf(400, input);
             }
         } else {
-            return new Response(500, "Input can't be empty");
+            return responseOf(500, "Input can't be empty");
         }
     }
 }

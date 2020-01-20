@@ -26,6 +26,6 @@ class SynonymOfWord extends Handler<String> {
             List<JsonNode> list = jsonNode.get("def").findValues("syn");
             result = list.get(0).findValuesAsText("text");
         }
-        return new Response(200, result);
+        return responseOf(200, result);
     }
 }

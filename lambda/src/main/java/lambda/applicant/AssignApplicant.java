@@ -3,6 +3,7 @@ package lambda.applicant;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
+import lambda.AuthenticatedHandler;
 import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.Applicant;
@@ -12,15 +13,16 @@ import lambda.AuthenticatedRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplicant.AssignRequest>> {
+public class AssignApplicant extends AuthenticatedHandler<AssignApplicant.AssignRequest> {
     @Override
     public Response handleRequest(AuthenticatedRequest<AssignRequest> authenticatedRequest, Context context) {
-        if(!authenticatedRequest.isRecruiter())
-            return new Response(403, "Recruiter permissions required");
-        if(!authenticatedRequest.getUserId().equals(authenticatedRequest.getBody().getRecruiterId()))
-            return new Response(403, "The assigned test doesn't belong to the caller");
+        super.handleRequest(authenticatedRequest, context);
+        if(requireRecruiter().isPresent())
+            return requireRecruiter().get();
+        if(!getUserId().equals(getBody().getRecruiterId()))
+            return responseOf(403, "The assigned test doesn't belong to the caller");
 
-        AssignRequest input = authenticatedRequest.getBody();
+        AssignRequest input = getBody();
 
         DynamoDBQueryExpression<TestInstance> queryExpression;
 
@@ -43,19 +45,19 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
             List<TestInstance> queryList = new ArrayList<>(getMapper().query(TestInstance.class, queryExpression));
 
             if (!queryList.isEmpty()) {
-                return new Response(409, queryList.stream()
+                return responseOf(409, queryList.stream()
                         .map(TestInstance::getTimestamp).collect(Collectors.toList()));
             }
         }
 
         Test test = getMapper().load(Test.class, input.getRecruiterId(), input.getTestId());
         if(test == null) {
-            return new Response(404, "Test was not found");
+            return responseOf(404, "Test was not found");
         }
 
         Applicant applicant = getMapper().load(Applicant.class, input.getApplicantId());
         if(applicant == null) {
-            return new Response(404, "Applicant was not found");
+            return responseOf(404, "Applicant was not found");
         }
 
         TestInstance testInstance = new TestInstance();
@@ -79,7 +81,7 @@ public class AssignApplicant extends Handler<AuthenticatedRequest<AssignApplican
 
         getMapper().save(testInstance);
 
-        return new Response(200, testInstance);
+        return responseOf(200, testInstance);
     }
 
     static class AssignRequest {

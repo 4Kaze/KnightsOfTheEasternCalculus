@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.Base64;
+import lambda.AuthenticatedHandler;
 import lambda.Handler;
 import lambda.Response;
 import lambda.applicant.applicant.Applicant;
@@ -20,35 +21,36 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class UploadPhoto extends Handler<AuthenticatedRequest<String>> {
+public class UploadPhoto extends AuthenticatedHandler<String> {
     @Override
     public Response handleRequest(AuthenticatedRequest<String> authenticatedRequest, Context context) {
-        if(authenticatedRequest.isRecruiter())
-            return new Response(403, "Only replicants can upload photos");
+        super.handleRequest(authenticatedRequest, context);
+        if(isRecruiter())
+            return responseOf(403, "Only replicants can upload photos");
 
-        Applicant applicant = getMapper().load(Applicant.class, authenticatedRequest.getUserId());
+        Applicant applicant = getMapper().load(Applicant.class, getUserId());
         AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 
         try {
-            s3.getObjectAcl("applicant-photos", authenticatedRequest.getUserId()+".png");
+            s3.getObjectAcl("applicant-photos", getUserId()+".png");
             if(applicant != null)
-                return new Response(409, "The photo for this replicant already exists");
+                return responseOf(409, "The photo for this replicant already exists");
         } catch(SdkClientException ignored) {
 
         }
-        String input = authenticatedRequest.getBody().replaceFirst("data:image/.*;base64,", "");
-        File file = createFile(input, authenticatedRequest.getUserId());
+        String input = getBody().replaceFirst("data:image/.*;base64,", "");
+        File file = createFile(input, getUserId());
         if(file == null)
-            return new Response(500, "Error processing image");
+            return responseOf(500, "Error processing image");
 
         PutObjectRequest request = new PutObjectRequest("applicant-photos",
-                authenticatedRequest.getUserId()+".png",file);
+                getUserId()+".png",file);
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("image/png");
         request.setMetadata(metadata);
         s3.putObject(request);
 
-        return new Response(200, "Photo uploaded successfully");
+        return responseOf(200, "Photo uploaded successfully");
     }
     private File createFile(String encoded, String username) {
         try(InputStream in = new ByteArrayInputStream(Base64.decode(encoded))) {

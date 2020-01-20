@@ -2,6 +2,7 @@ package lambda.test;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.lambda.runtime.Context;
+import lambda.AuthenticatedHandler;
 import lambda.Handler;
 import lambda.Response;
 import lambda.test.model.SolvableOpenQuestion;
@@ -13,16 +14,17 @@ import lambda.AuthenticatedRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
+class GradeTest extends AuthenticatedHandler<TestInstance> {
 
     @Override
     public Response handleRequest(AuthenticatedRequest<TestInstance> authenticatedRequest, Context context) {
-        if(!authenticatedRequest.isRecruiter())
-            return new Response(403, "Recruiter permissions required");
-        if(!authenticatedRequest.getUserId().equals(authenticatedRequest.getBody().getRecruiterId()))
-            return new Response(403, "Insufficient permissions");
+        super.handleRequest(authenticatedRequest, context);
+        if(requireRecruiter().isPresent())
+            return requireRecruiter().get();
+        if(!getUserId().equals(getBody().getRecruiterId()))
+            return responseOf(403, "Insufficient permissions");
 
-        TestInstance input = authenticatedRequest.getBody();
+        TestInstance input = getBody();
         TestInstance test = getMapper().load(TestInstance.class, input.getApplicantId(), input.getTimestamp());
         test.setReceivedScore(0);
         test.gradeTest(input);
@@ -35,7 +37,7 @@ class GradeTest extends Handler<AuthenticatedRequest<TestInstance>> {
                 .build();
 
         getMapper().save(test, dynamoDBMapperConfig);
-        return new Response(200, "Test successfully saved");
+        return responseOf(200, "Test successfully saved");
 
     }
 }

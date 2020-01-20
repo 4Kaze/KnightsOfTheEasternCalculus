@@ -12,9 +12,9 @@ class AddApplicant extends Handler<Applicant> {
         if (getMapper().load(Applicant.class, input.getId()) == null) {
             input.setLastName(input.getLastName().toLowerCase());
             getMapper().save(input);
-            return new Response(200, input);
+            return responseOf(200, input);
         } else {
-            return new Response(409, "Replicant already exists");
+            return responseOf(409, "Replicant already exists");
         }
     }
 }
