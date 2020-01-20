@@ -23,21 +23,7 @@ class GetTestInstance extends Handler<AuthenticatedRequest<TestRequest>> {
             return new Response(403, "Insufficient permissions");
 
         if (test.getStatus() == 0) {
-            if(test.getCloseQuestions() == null)
-                test.setCloseQuestions(new ArrayList<>());
-            else
-                test.getCloseQuestions().forEach(question -> question.setCorrectAnswers(new ArrayList<>()));
-
-            if(test.getOpenQuestions() == null)
-                test.setOpenQuestions(new ArrayList<>());
-            else
-                test.getOpenQuestions().forEach(question -> question.setCorrectAnswer(""));
-
-            if(test.getValueQuestions() == null)
-                test.setValueQuestions(new ArrayList<>());
-            else
-                test.getValueQuestions().forEach(question -> question.setCorrectAnswer(null));
-
+            test.eraseAnswers();
         } else if (test.getStatus() == 1) {
             test.getOpenQuestions().forEach(question -> question.setReceivedScore(0));
             test.getValueQuestions().forEach(question -> question.setReceivedScore(0));
