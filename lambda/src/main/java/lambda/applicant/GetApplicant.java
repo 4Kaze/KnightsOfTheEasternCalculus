@@ -2,10 +2,10 @@ package lambda.applicant;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
+import lambda.Response;
 import lambda.applicant.applicant.Applicant;
 import lambda.request.AuthenticatedRequest;
-import lambda.Response;
-import util.Utils;
+import lambda.util.Utils;
 
 class GetApplicant extends Handler<AuthenticatedRequest<String>> {
     @Override

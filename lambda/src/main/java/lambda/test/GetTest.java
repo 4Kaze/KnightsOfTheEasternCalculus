@@ -2,10 +2,10 @@ package lambda.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
+import lambda.Response;
+import lambda.model.Test;
 import lambda.request.AuthenticatedRequest;
 import lambda.request.TestRequest;
-import model.Test;
-import lambda.Response;
 
 class GetTest extends Handler<AuthenticatedRequest<TestRequest>> {
     @Override

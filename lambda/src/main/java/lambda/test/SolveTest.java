@@ -3,9 +3,9 @@ package lambda.test;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.request.AuthenticatedRequest;
-import model.*;
 import lambda.Response;
+import lambda.model.*;
+import lambda.request.AuthenticatedRequest;
 
 import java.util.ArrayList;
 import java.util.List;

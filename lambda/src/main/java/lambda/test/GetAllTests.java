@@ -4,11 +4,13 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.request.AuthenticatedRequest;
-import model.Test;
 import lambda.Response;
+import lambda.model.Test;
+import lambda.request.AuthenticatedRequest;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class GetAllTests extends Handler<AuthenticatedRequest<GetAllTests.TestQuery>> {
 

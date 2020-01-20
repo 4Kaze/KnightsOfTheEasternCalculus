@@ -4,10 +4,10 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.applicant.applicant.Applicant;
-import lambda.request.AuthenticatedRequest;
-import model.*;
 import lambda.Response;
+import lambda.applicant.applicant.Applicant;
+import lambda.model.*;
+import lambda.request.AuthenticatedRequest;
 
 import java.util.*;
 import java.util.stream.Collectors;

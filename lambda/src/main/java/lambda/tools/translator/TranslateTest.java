@@ -2,10 +2,10 @@ package lambda.tools.translator;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.tools.Tools;
-import lambda.request.AuthenticatedRequest;
-import model.Test;
 import lambda.Response;
+import lambda.model.Test;
+import lambda.request.AuthenticatedRequest;
+import lambda.tools.Tools;
 
 class TranslateTest extends Handler<AuthenticatedRequest<Test>> {
 

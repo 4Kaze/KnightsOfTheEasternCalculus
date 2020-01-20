@@ -4,9 +4,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.request.AuthenticatedRequest;
-import model.TestInstance;
 import lambda.Response;
+import lambda.model.TestInstance;
+import lambda.request.AuthenticatedRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -3,12 +3,12 @@ package lambda.test;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import lambda.request.AuthenticatedRequest;
-import model.SolvableOpenQuestion;
-import model.SolvableValueQuestion;
-import model.TestInstance;
-import model.TestStatus;
 import lambda.Response;
+import lambda.model.SolvableOpenQuestion;
+import lambda.model.SolvableValueQuestion;
+import lambda.model.TestInstance;
+import lambda.model.TestStatus;
+import lambda.request.AuthenticatedRequest;
 
 import java.util.ArrayList;
 import java.util.List;

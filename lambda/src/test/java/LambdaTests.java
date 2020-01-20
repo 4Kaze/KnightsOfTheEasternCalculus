@@ -1,17 +1,17 @@
 import lambda.applicant.AssignApplicant;
-import lambda.test.AddTestInstance;
-import lambda.test.GetUncheckedTestInstances;
+import lambda.applicant.UploadPhoto;
+import lambda.applicant.applicant.Applicant;
 import lambda.applicant.applicant.Experience;
 import lambda.applicant.applicant.Univerity;
-import lambda.applicant.applicant.Applicant;
-import lambda.applicant.UploadPhoto;
-import model.CloseQuestion;
-import model.OpenQuestion;
-import model.SolvableOpenQuestion;
-import model.TestInstance;
+import lambda.model.CloseQuestion;
+import lambda.model.OpenQuestion;
+import lambda.model.SolvableOpenQuestion;
+import lambda.model.TestInstance;
+import lambda.test.AddTestInstance;
+import lambda.test.GetUncheckedTestInstances;
+import lambda.util.Utils;
 import org.junit.Assert;
 import org.junit.Test;
-import util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

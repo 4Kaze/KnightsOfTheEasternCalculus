@@ -2,8 +2,8 @@ package lambda.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import lambda.Handler;
-import model.TestInstance;
 import lambda.Response;
+import lambda.model.TestInstance;
 
 public class AddTestInstance extends Handler<TestInstance> {
     @Override
